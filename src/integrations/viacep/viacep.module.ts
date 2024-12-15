@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { GetCepServiceByViaCep } from './services/get-cep.service';
+import { GetCepServiceByViaCep } from './services/get-cep-by-viacep.service';
 
 @Module({
   imports: [],
