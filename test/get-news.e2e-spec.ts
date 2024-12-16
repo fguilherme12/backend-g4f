@@ -26,47 +26,40 @@ describe('Dado o módulo de notícias', () => {
     await app.close();
   });
 
-  describe('Quando uma nova notícia é criada', () => {
-    it('Então deve retornar sucesso', async () => {
-      const payload = {
-        title: 'Nova Notícia',
-        description: 'Descrição da notícia',
-      };
+  describe('Quando as notícias são buscadas', () => {
+    it('Então deve retornar todas as notícias', async () => {
+      const response = await request(app.getHttpServer())
+        .get('/news')
+        .expect(200);
+
+      expect(Array.isArray(response.body)).toBe(true);
+    });
+
+    it('Então deve retornar uma notícia específica pelo ID', async () => {
+      const createdNews = await request(app.getHttpServer())
+        .post('/news')
+        .send({ title: 'Notícia', description: 'Descrição' })
+        .expect(201);
 
       const response = await request(app.getHttpServer())
-        .post('/news')
-        .send(payload)
-        .expect(201);
+        .get(`/news/${createdNews.body.id}`)
+        .expect(200);
 
       expect(response.body).toEqual(
         expect.objectContaining({
-          id: expect.any(Number),
-          title: payload.title,
-          description: payload.description,
+          id: createdNews.body.id,
+          title: 'Notícia',
+          description: 'Descrição',
         }),
       );
     });
 
-    it('Então deve retornar erro se o título não for informado', async () => {
-      const payload = { description: 'Sem título' };
-
+    it('Então deve retornar erro se o ID não existir', async () => {
       const response = await request(app.getHttpServer())
-        .post('/news')
-        .send(payload)
-        .expect(400);
+        .get('/news/9999')
+        .expect(404);
 
-      expect(response.body.message).toContain('O título é obrigatório.');
-    });
-
-    it('Então deve retornar erro se a descrição não for informada', async () => {
-      const payload = { title: 'Sem descrição' };
-
-      const response = await request(app.getHttpServer())
-        .post('/news')
-        .send(payload)
-        .expect(400);
-
-      expect(response.body.message).toContain('A descrição é obrigatória.');
+      expect(response.body.message).toContain('News with ID 9999 not found');
     });
   });
 });
