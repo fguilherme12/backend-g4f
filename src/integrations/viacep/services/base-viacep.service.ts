@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ViaCepRoutes } from '../types/viacep.routes';
 import { ViaCepHttpMethods } from '../types/viacep.types';
 import { Logger } from '@nestjs/common';
 
@@ -8,11 +7,9 @@ export abstract class BaseViaCepService {
   protected client: AxiosInstance;
   private timeout = 4000;
   protected abstract maxRetries: number;
-  protected abstract getViaCepRoute(): ViaCepRoutes;
 
   constructor() {
     this.client = axios.create({
-      // baseURL: `${process.env.VIACEP_BASE_URL}`,
       baseURL: `https://viacep.com.br`,
       timeout: this.timeout,
     });
