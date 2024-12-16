@@ -39,7 +39,7 @@ API desenvolvida utilizando NestJS para gerenciar notícias (CRUD) e realizar co
 
 1. Clone este repositório:
 
-   git clone [<URL_DO_REPOSITORIO>](https://github.com/fguilherme12/backend-g4f.git)
+   git clone - [Backend G4F](https://github.com/fguilherme12/backend-g4f)
    cd projeto-g4f
 
 2. Instale as dependências:
