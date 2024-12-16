@@ -3,6 +3,21 @@
 ## Descrição
 API desenvolvida utilizando NestJS para gerenciar notícias (CRUD) e realizar consultas de CEP por meio da integração com a API do ViaCEP.
 
+
+## Estrutura de pastas e arquivos
+
+   - A estrutura do projeto é organizada por módulos, que facilita a manutenção e desenvolvimento da aplicação.
+   - Esse padrão permite a adição de novos módulos sem impacto em módulos existentes.
+   - As integrações com APIs externas são isoladas na pasta integrations
+   - Cada módulo é isolado em sua própria pasta, com subpastas específicas para:
+      - controllers: Lida com as requisições HTTP.
+      - entities e Dtos: Estruturas de dados e objetos de transferência.
+      - services: Contém a lógica de negócio.
+      - guards: Para segurança e controle de acesso.
+   - Cada método de controller é definido em um arquivo isolado, garantindo clareza e responsabilidade única.
+   - A pasta test organiza os testes end-to-end (E2E), seguindo o mesmo padrão modular dos arquivos de código-fonte.
+
+
 ## Tecnologias Principais
 - **NestJS**: Framework para construir aplicações escaláveis e eficientes em Node.js.
 - **Docker**: Para criar contêineres e facilitar a execução em diferentes ambientes.
